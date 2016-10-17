@@ -6,6 +6,6 @@ response = requests.get('https://en.wikipedia.org/wiki/Neighborhoods_in_New_York
 
 print(response.text)
 
-# soup = BeautifulSoup(response, 'html.parser')
+soup = BeautifulSoup(response, 'html.parser')
 
 # print(soup.prettify())
