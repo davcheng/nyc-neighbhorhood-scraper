@@ -1,7 +1,6 @@
-# Webscraper of NY Cities
+# Webscraper of NY Cities (plus other random scrapers)
 
 Creates a database table that contains all of the neighborhoods in NYC as separate rows, using list from Wikipedia.
-
 
 python 3 + beautiful soup
 
