@@ -14,18 +14,19 @@ neighborhood_response = requests.get('https://en.wikipedia.org/wiki/Neighborhood
 # soup conatins the html page
 soup = BeautifulSoup(neighborhood_response.text, 'html.parser')
 
-
+# create table of neighborhoods by grabbing the table and all rows in that table
 city_info_table = soup.table
 table_rows = city_info_table("tr")
+# iterate over all rows, grab the second to last row
 for row in table_rows:
     neighborhood = row.contents[-2].text
+    # strip commas and remove spaces and store each neighborhood
     stripped_neighborhoods = [x.strip() for x in neighborhood.split(',')]
     for n in stripped_neighborhoods:
         c.execute('INSERT INTO neighborhoods (name) VALUES (?)', [n])
         print(n)
 
-cursor_object = conn.execute('SELECT * from neighborhoods order by id desc')
-# iterate over all squawks and store
-list = cursor_object.fetchall
-
+# proving to myself that this works
+cursor_object = c.execute('SELECT * from neighborhoods order by id desc')
+list = cursor_object.fetchall()
 print(list)
