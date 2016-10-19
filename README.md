@@ -1,6 +1,10 @@
-# Webscraper of NY Cities (plus other random scrapers)
+# Webscraper of Wiki (NYC neighborhoods and Country + AssociatedPopulations)
 
-Creates a database table that contains all of the neighborhoods in NYC as separate rows, using list from Wikipedia.
+# nyc_scraper
+Creates a database table that contains all of the neighborhoods in NYC as separate rows, using list from https://en.wikipedia.org/wiki/Neighborhoods_in_New_York_City.
+
+# country pop scraper
+Creates a database table that contains all of the countries listed on https://en.wikipedia.org/wiki/List_of_sovereign_states#List_of_states and grabs the populations from their associated wiki page
 
 python 3 + beautiful soup
 

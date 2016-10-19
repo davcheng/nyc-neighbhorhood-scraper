@@ -6,24 +6,37 @@ import sqlite3
 conn = sqlite3.connect('country.db')
 c = conn.cursor()
 c.execute('DROP TABLE IF EXISTS country;')
-c.execute('CREATE TABLE country ( id integer primary key autoincrement, name text not null, population integer);')
+c.execute('CREATE TABLE country ( id integer primary key autoincrement, country_name text not null, country_population integer);')
 
-# get response
-country_response = requests.get('https://en.wikipedia.org/wiki/List_of_sovereign_states#List_of_states')
+def get_country_pop(country_name):
 
-# soup conatins the html page
-soup = BeautifulSoup(country_response.text, 'html.parser')
+    response = requests.get('https://en.wikipedia.org/wiki/',country_name)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    yo = 1
+    print(response)
+    # return(1232)
 
-# create table of neighborhoods by grabbing the table and all rows in that table
-country_info_table = soup.table
-table_rows = country_info_table("tr")
+def scrape_countries():
+    # get response
+    country_response = requests.get('https://en.wikipedia.org/wiki/List_of_sovereign_states#List_of_states')
+    # soup conatins the html page
+    soup = BeautifulSoup(country_response.text, 'html.parser')
+    # create table of neighborhoods by grabbing the table and all rows in that table
+    country_info_table = soup.table
+    table_rows = country_info_table("tr")
 
-print(table_rows)
+    # grab country names
+    for row in table_rows:
+        country_name = row.contents[1]
+        a_tag = country_name.a
+        if a_tag:
+            country_name = a_tag.contents[0]
+            country_population = get_country_pop(country_name)
+            # store into db
+            c.execute('INSERT INTO neighborhood (country_name, country_population) VALUES (?)', [country_name , country_population])
+            print(get_country_pop(country_name))
 
-# iterate over all rows, grab the second to last row
-for row in table_rows:
-    country_name = row.contents[1]
-    print(country_name("a"))
+
     # # strip commas and remove spaces and store each neighborhood
     # stripped_neighborhoods = [x.strip() for x in neighborhood.split(',')]
     # for n in stripped_neighborhoods:
@@ -34,3 +47,7 @@ for row in table_rows:
 # cursor_object = c.execute('SELECT * from neighborhoods order by id desc')
 # list = cursor_object.fetchall()
 # print(list)
+
+
+if __name__ == '__main__':
+    scrape_countries()
