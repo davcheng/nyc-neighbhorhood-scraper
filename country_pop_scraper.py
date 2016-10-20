@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import sqlite3
+import re
 
 # create sqlite connection
 conn = sqlite3.connect('country.db')
@@ -12,8 +13,11 @@ def get_country_pop(country_name):
 
     response = requests.get('https://en.wikipedia.org/wiki/',country_name)
     soup = BeautifulSoup(response.text, 'html.parser')
-    yo = 1
-    print(response)
+    country_info = soup.find_all("a")
+    country_pop = country_info
+    print(country_info)
+
+    # return(population)
     # return(1232)
 
 def scrape_countries():
@@ -33,15 +37,8 @@ def scrape_countries():
             country_name = a_tag.contents[0]
             country_population = get_country_pop(country_name)
             # store into db
-            c.execute('INSERT INTO neighborhood (country_name, country_population) VALUES (?)', [country_name , country_population])
-            print(get_country_pop(country_name))
-
-
-    # # strip commas and remove spaces and store each neighborhood
-    # stripped_neighborhoods = [x.strip() for x in neighborhood.split(',')]
-    # for n in stripped_neighborhoods:
-    #     c.execute('INSERT INTO neighborhoods (name) VALUES (?)', [n])
-    #     print(n)
+            # c.execute('INSERT INTO neighborhood (country_name, country_population) VALUES (?)', [country_name , country_population])
+            # print(get_country_pop(country_name))
 
 # # proving to myself that this works
 # cursor_object = c.execute('SELECT * from neighborhoods order by id desc')
@@ -50,4 +47,5 @@ def scrape_countries():
 
 
 if __name__ == '__main__':
-    scrape_countries()
+    # scrape_countries()
+    get_country_pop("Canada")
