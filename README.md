@@ -1,4 +1,8 @@
-# Webscraper of Wiki (NYC neighborhoods and Country + AssociatedPopulations)
+# Webscraper of various sites (NYC neighborhoods and Country + AssociatedPopulations)
+
+# allsides_scraper
+Creates a db with news sources and biases (covereted to a double) using http://www.allsides.com/bias/bias-ratings
+
 
 # nyc_scraper
 Creates a database table that contains all of the neighborhoods in NYC as separate rows, using list from https://en.wikipedia.org/wiki/Neighborhoods_in_New_York_City.

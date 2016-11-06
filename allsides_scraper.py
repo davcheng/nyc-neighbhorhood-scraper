@@ -6,7 +6,7 @@ import sqlite3
 conn = sqlite3.connect('newssource.db')
 c = conn.cursor()
 c.execute('DROP TABLE IF EXISTS newssource;')
-c.execute('CREATE TABLE newssource ( id integer primary key autoincrement, name text not null, bias_score text);')
+c.execute('CREATE TABLE newssource ( id integer primary key autoincrement, name text not null, bias_score number);')
 
 # converts string to bias score
 def bias_converter(bias_text):
