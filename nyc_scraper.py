@@ -29,7 +29,7 @@ def scrape_nyc():
 
 if __name__ == '__main__':
     scrape_nyc()
-    # proving to myself that this works
+    # proving to myself that this actually works
     cursor_object = c.execute('SELECT * from neighborhood order by id desc')
     list = cursor_object.fetchall()
     print(list)
