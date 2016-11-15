@@ -58,6 +58,6 @@ def scrape_allsides():
 if __name__ == '__main__':
     scrape_allsides()
     # proving to myself that this actually works
-    cursor_object = c.execute('SELECT * from newssource order by id desc')
+    cursor_object = c.execute('SELECT name, bias_score from newssource order by id desc')
     list = cursor_object.fetchall()
     print(list)
